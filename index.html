@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plata · Joyería</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plata-1: #f4f5f7;
+    --plata-2: #e6e8ec;
+    --plata-3: #c9cdd3;
+    --plata-4: #8a9099;
+    --plata-5: #4a4f57;
+    --oro-1: #f5e6b8;
+    --oro-2: #e8d18a;
+    --oro-3: #c9a961;
+    --oro-4: #a4874a;
+    --negro: #1c1d20;
+    --blanco: #ffffff;
+    --texto: #2a2c30;
+    --texto-suave: #6b6f76;
+    --sombra-suave: 0 1px 3px rgba(28,29,32,0.06), 0 4px 16px rgba(28,29,32,0.04);
+    --sombra-hover: 0 4px 12px rgba(28,29,32,0.08), 0 12px 32px rgba(28,29,32,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(180deg, #fbfbfc 0%, #f4f5f7 100%);
+    color: var(--texto);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ============ HEADER ============ */
+  header {
+    background: linear-gradient(180deg, #232428 0%, #1c1d20 100%);
+    color: #fff;
+    padding: 1.1rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid rgba(201,169,97,0.25);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset;
+  }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.85rem;
+    font-weight: 500;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #f5e6b8 0%, #c9a961 60%, #a4874a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  header h1::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #f5e6b8, #c9a961 70%);
+    box-shadow: 0 0 8px rgba(201,169,97,0.6);
+  }
+  nav { display: flex; gap: 0.5rem; }
+  nav button {
+    background: transparent;
+    color: #d8dadd;
+    border: 1px solid rgba(201,169,97,0.35);
+    padding: 0.55rem 1.15rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: inherit;
+    transition: all 0.25s ease;
+  }
+  nav button:hover {
+    color: var(--oro-1);
+    border-color: var(--oro-3);
+    background: rgba(201,169,97,0.08);
+  }
+
+  /* ============ MAIN ============ */
+  main { max-width: 1240px; margin: 2.5rem auto; padding: 0 1.5rem; }
+
+  .titulo-seccion {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--negro);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    position: relative;
+  }
+  .titulo-seccion::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--oro-3), transparent);
+  }
+
+  /* ============ FILTROS ============ */
+  .filtros {
+    display: flex;
+    gap: 0.9rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--plata-2);
+    border-radius: 4px;
+    backdrop-filter: blur(6px);
+  }
+  .filtros select, .filtros input {
+    padding: 0.65rem 0.9rem;
+    border: 1px solid var(--plata-3);
+    border-radius: 2px;
+    font-size: 0.88rem;
+    background: #fff;
+    font-family: inherit;
+    color: var(--texto);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .filtros select:focus, .filtros input:focus {
+    border-color: var(--oro-3);
+    box-shadow: 0 0 0 3px rgba(201,169,97,0.12);
+  }
+  .filtros input { flex: 1; min-width: 180px; }
+
+  /* ============ GRID ============ */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--plata-2);
+    position: relative;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(201,169,97,0) inset;
+    transition: box-shadow 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-hover);
+  }
+  .card:hover::after {
+    box-shadow: 0 0 0 1px rgba(201,169,97,0.5) inset;
+  }
+
+  .card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background: var(--plata-1);
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .card:hover img { transform: scale(1.03); }
+
+  .card-body { padding: 1.15rem 1.25rem 1.35rem; }
+  .card-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+    color: var(--negro);
+    letter-spacing: 0.2px;
+  }
+  .card-body .meta {
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-top: 0.15rem;
+  }
+  .card-body .precio {
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--oro-4);
+    letter-spacing: 0.3px;
+  }
+  .card-body .precio-oferta {
+    text-decoration: line-through;
+    color: var(--plata-4);
+    font-size: 0.85rem;
+    margin-left: 0.5rem;
+    font-weight: 400;
+  }
+
+  .etiqueta {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-right: 0.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  /* ============ MODAL ============ */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(28,29,32,0.72);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.active { display: flex; animation: fadeIn 0.25s ease; }
+
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .modal-wrapper { position: relative; width: 100%; max-width: 940px; }
+
+  .modal {
+    background: #fff;
+    border-radius: 4px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--plata-3);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  }
+  @media (max-width: 700px) { .modal { grid-template-columns: 1fr; } }
+
+  .modal .galeria { background: var(--plata-1); border-right: 1px solid var(--plata-2); }
+  .modal .galeria img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    display: block;
+  }
+  .modal .thumbs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    overflow-x: auto;
+    background: #fff;
+    border-top: 1px solid var(--plata-2);
+  }
+  .modal .thumbs img {
+    width: 60px; height: 60px;
+    object-fit: cover;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0.5;
+    border: 1px solid transparent;
+    transition: opacity 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .modal .thumbs img:hover { opacity: 0.8; }
+  .modal .thumbs img.active {
+    opacity: 1;
+    border-color: var(--oro-3);
+  }
+
+  .modal .info { padding: 2rem 1.75rem; }
+  .modal .info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--negro);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.3px;
+  }
+  .modal .info .meta {
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+  }
+  .modal .info .precio {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--oro-4);
+    margin: 1rem 0;
+    letter-spacing: 0.3px;
+  }
+  .modal .info .precio-oferta {
+    text-decoration: line-through;
+    color: var(--plata-4);
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    font-weight: 400;
+  }
+  .modal .info p {
+    margin: 0.75rem 0;
+    color: var(--texto);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  .modal .info .especificaciones {
+    border-top: 1px solid var(--plata-2);
+    padding-top: 1rem;
+    margin-top: 1rem;
+  }
+  .modal .info .especificaciones div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--plata-1);
+  }
+  .modal .info .especificaciones div span:first-child {
+    color: var(--texto-suave);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-size: 0.75rem;
+  }
+
+  .btn-cerrar {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #fff;
+    border: 1px solid var(--plata-3);
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: var(--sombra-suave);
+    transition: all 0.2s;
+    color: var(--texto);
+    z-index: 2;
+  }
+  .btn-cerrar:hover {
+    background: var(--negro);
+    color: var(--oro-1);
+    border-color: var(--negro);
+  }
+
+  .btn-wsp {
+    display: inline-block;
+    background: linear-gradient(180deg, #2a2c30, #1c1d20);
+    color: #f5e6b8;
+    padding: 0.85rem 1.75rem;
+    border-radius: 2px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 1.25rem;
+    border: 1px solid var(--oro-3);
+    cursor: pointer;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: inherit;
+    transition: all 0.25s ease;
+  }
+  .btn-wsp:hover {
+    background: linear-gradient(180deg, var(--oro-3), var(--oro-4));
+    color: var(--negro);
+    border-color: var(--oro-4);
+  }
+
+  /* ============ LOGIN ============ */
+  .login-box {
+    max-width: 400px;
+    margin: 5rem auto;
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 4px;
+    border: 1px solid var(--plata-2);
+    box-shadow: var(--sombra-suave);
+  }
+  .login-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 1.75rem;
+    color: var(--negro);
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--plata-3);
+    border-radius: 2px;
+    font-size: 0.92rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .login-box input:focus {
+    border-color: var(--oro-3);
+    box-shadow: 0 0 0 3px rgba(201,169,97,0.12);
+  }
+  .login-box button {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(180deg, #2a2c30, #1c1d20);
+    color: var(--oro-1);
+    border: 1px solid var(--oro-3);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: inherit;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+  .login-box button:hover {
+    background: linear-gradient(180deg, var(--oro-3), var(--oro-4));
+    color: var(--negro);
+  }
+
+  /* ============ ADMIN ============ */
+  .admin-panel {
+    background: #fff;
+    padding: 1.75rem;
+    border-radius: 4px;
+    border: 1px solid var(--plata-2);
+    box-shadow: var(--sombra-suave);
+    margin-bottom: 2rem;
+  }
+  .admin-panel h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: var(--negro);
+    letter-spacing: 0.5px;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--plata-2);
+  }
+  .admin-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .admin-form input, .admin-form select, .admin-form textarea {
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--plata-3);
+    border-radius: 2px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #fff;
+  }
+  .admin-form input:focus, .admin-form select:focus, .admin-form textarea:focus {
+    border-color: var(--oro-3);
+    box-shadow: 0 0 0 3px rgba(201,169,97,0.12);
+  }
+  .admin-form textarea { grid-column: 1 / -1; min-height: 90px; resize: vertical; }
+  .admin-form .acciones {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .admin-form .acciones button {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.82rem;
+    font-family: inherit;
+    min-width: 150px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+  }
+  .btn-guardar {
+    background: linear-gradient(180deg, #2a2c30, #1c1d20);
+    color: var(--oro-1);
+    border-color: var(--oro-3) !important;
+  }
+  .btn-guardar:hover {
+    background: linear-gradient(180deg, var(--oro-3), var(--oro-4));
+    color: var(--negro);
+  }
+  .btn-cancelar {
+    background: var(--plata-1);
+    color: var(--texto);
+    border-color: var(--plata-3) !important;
+  }
+  .btn-cancelar:hover { background: var(--plata-2); }
+
+  .admin-lista { margin-top: 1.5rem; }
+  .admin-lista .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 0.5rem;
+    border-bottom: 1px solid var(--plata-2);
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .admin-lista .item:last-child { border-bottom: none; }
+  .admin-lista .item strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .admin-lista .item .acciones-item { display: flex; gap: 0.5rem; }
+  .admin-lista .item button {
+    border: 1px solid;
+    padding: 0.45rem 0.9rem;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 0.72rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: inherit;
+    background: #fff;
+    transition: all 0.2s ease;
+  }
+  .btn-editar-item { color: var(--negro); border-color: var(--plata-3); }
+  .btn-editar-item:hover { border-color: var(--oro-3); color: var(--oro-4); }
+  .btn-eliminar-item { color: #a33; border-color: #e3c2c2; }
+  .btn-eliminar-item:hover { background: #a33; color: #fff; border-color: #a33; }
+
+  .oculto { display: none !important; }
+  .cargando {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: var(--texto-suave);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+  }
+  .error {
+    color: #8a2a2a;
+    padding: 0.9rem 1.1rem;
+    background: #fbeaea;
+    border-left: 3px solid #a33;
+    border-radius: 2px;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+  .ok {
+    color: #2a5a2a;
+    padding: 0.9rem 1.1rem;
+    background: #eaf6ea;
+    border-left: 3px solid #4a8a4a;
+    border-radius: 2px;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+  }
+
+  .imagenes-existentes {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.75rem;
+    background: var(--plata-1);
+    border: 1px solid var(--plata-2);
+    border-radius: 2px;
+    min-height: 70px;
+    align-items: center;
+  }
+  .imagenes-existentes .mini { position: relative; width: 72px; height: 72px; }
+  .imagenes-existentes .mini img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    border: 1px solid var(--plata-3);
+  }
+  .imagenes-existentes .mini button {
+    position: absolute;
+    top: -7px; right: -7px;
+    background: #a33;
+    color: #fff;
+    border: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+  .imagenes-existentes .vacio {
+    color: var(--texto-suave);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  /* Scrollbar sutil */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--plata-1); }
+  ::-webkit-scrollbar-thumb { background: var(--plata-3); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--plata-4); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Plata</h1>
+  <nav>
+    <button id="btnAdmin">Admin</button>
+    <button id="btnSalir" class="oculto">Salir</button>
+  </nav>
+</header>
+
+<main>
+  <section id="vistaCatalogo">
+    <h2 class="titulo-seccion">Catálogo</h2>
+    <div class="filtros">
+      <select id="filtroCategoria">
+        <option value="">Todas las categorías</option>
+      </select>
+      <select id="filtroMaterial">
+        <option value="">Todos los materiales</option>
+      </select>
+      <input type="text" id="buscador" placeholder="Buscar producto..." autocomplete="off" name="busqueda-no-autofill-xyz">
+    </div>
+    <div id="gridProductos" class="grid"></div>
+    <div id="cargandoCatalogo" class="cargando">Cargando catálogo…</div>
+  </section>
+
+  <section id="vistaLogin" class="oculto">
+    <div class="login-box">
+      <h2>Iniciar sesión</h2>
+      <input type="email" id="loginEmail" placeholder="Email" autocomplete="off">
+      <input type="password" id="loginPassword" placeholder="Contraseña" autocomplete="new-password">
+      <button id="btnLogin">Entrar</button>
+      <div id="loginError" class="error oculto"></div>
+    </div>
+  </section>
+
+  <section id="vistaAdmin" class="oculto">
+    <div class="admin-panel">
+      <h2 id="formTitulo">Nuevo producto</h2>
+      <div class="admin-form">
+        <input type="text" id="pCodigo" placeholder="Código (ej: AN-001)">
+        <input type="text" id="pNombre" placeholder="Nombre del producto" required>
+        <input type="number" id="pPrecio" placeholder="Precio" step="0.01" required>
+        <input type="number" id="pPrecioOferta" placeholder="Precio oferta (opcional)" step="0.01">
+        <input type="number" id="pStock" placeholder="Stock" value="0">
+        <select id="pCategoria"></select>
+        <select id="pMaterial"></select>
+        <input type="file" id="pImagen" accept="image/*" multiple>
+        <textarea id="pDescripcion" placeholder="Descripción"></textarea>
+
+        <div id="imagenesExistentes" class="imagenes-existentes oculto"></div>
+
+        <div class="acciones">
+          <button id="btnCrearProducto" class="btn-guardar">Crear producto</button>
+          <button id="btnCancelarEdicion" class="btn-cancelar oculto">Cancelar</button>
+        </div>
+      </div>
+      <div id="adminMensaje" class="oculto"></div>
+    </div>
+
+    <div class="admin-panel admin-lista">
+      <h2>Productos existentes</h2>
+      <div id="listaAdmin"></div>
+    </div>
+  </section>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-wrapper">
+    <button class="btn-cerrar" id="btnCerrarModal">✕</button>
+    <div class="modal" id="modalContenido"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'https://razhtyvsunbqxdorakya.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJhemh0eXZzdW5icXhkb3Jha3lhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NzE2MjksImV4cCI6MjEwNzA0NzYyOX0.SjCAKtCGg8rqJ6zYSqH1h4P9g_fn5kRBU09lwCd6Ut0';
+const WHATSAPP_NUMERO = '5523025837';
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let productosCache = [];
+let categoriasCache = [];
+let materialesCache = [];
+let usuarioActual = null;
+let productoEditandoId = null;
+let imagenesAEliminar = [];
+
+const $ = (id) => document.getElementById(id);
+const formatoPrecio = (n) => '$' + Number(n).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function mostrar(elemento) { elemento.classList.remove('oculto'); }
+function ocultar(elemento) { elemento.classList.add('oculto'); }
+
+async function cargarCategoriasYMateriales() {
+  const { data: cats } = await db.from('categorias').select('*').order('nombre');
+  const { data: mats } = await db.from('materiales').select('*').order('nombre');
+  categoriasCache = cats || [];
+  materialesCache = mats || [];
+
+  const filtroCat = $('filtroCategoria');
+  const filtroMat = $('filtroMaterial');
+  const pCat = $('pCategoria');
+  const pMat = $('pMaterial');
+
+  categoriasCache.forEach(c => {
+    filtroCat.insertAdjacentHTML('beforeend', `<option value="${c.id}">${c.nombre}</option>`);
+    pCat.insertAdjacentHTML('beforeend', `<option value="${c.id}">${c.nombre}</option>`);
+  });
+  materialesCache.forEach(m => {
+    filtroMat.insertAdjacentHTML('beforeend', `<option value="${m.id}">${m.nombre}</option>`);
+    pMat.insertAdjacentHTML('beforeend', `<option value="${m.id}">${m.nombre}</option>`);
+  });
+}
+
+async function cargarProductos() {
+  const { data, error } = await db
+    .from('productos')
+    .select(`
+      *,
+      categorias(nombre, slug),
+      materiales(nombre),
+      imagenes(id, url, orden),
+      producto_etiquetas(etiquetas(nombre, color))
+    `)
+    .eq('activo', true)
+    .order('created_at', { ascending: false });
+
+  ocultar($('cargandoCatalogo'));
+
+  if (error) {
+    $('gridProductos').innerHTML = `<div class="error">Error al cargar productos: ${error.message}</div>`;
+    return;
+  }
+  productosCache = data || [];
+  renderCatalogo();
+}
+
+function renderCatalogo() {
+  const filtroCat = $('filtroCategoria').value;
+  const filtroMat = $('filtroMaterial').value;
+  const busqueda = $('buscador').value.toLowerCase().trim();
+
+  const filtrados = productosCache.filter(p => {
+    if (filtroCat && String(p.categoria_id) !== filtroCat) return false;
+    if (filtroMat && String(p.material_id) !== filtroMat) return false;
+    if (busqueda && !p.nombre.toLowerCase().includes(busqueda) && !(p.codigo || '').toLowerCase().includes(busqueda)) return false;
+    return true;
+  });
+
+  const grid = $('gridProductos');
+  if (filtrados.length === 0) {
+    grid.innerHTML = '<div class="cargando">No hay productos que coincidan.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtrados.map(p => {
+    const img = (p.imagenes && p.imagenes.sort((a,b) => a.orden - b.orden)[0]?.url) || 'https://via.placeholder.com/300x300?text=Sin+imagen';
+    const etiquetas = (p.producto_etiquetas || [])
+      .map(pe => pe.etiquetas ? `<span class="etiqueta" style="background:${pe.etiquetas.color}">${pe.etiquetas.nombre}</span>` : '')
+      .join('');
+    const precioOferta = p.precio_oferta ? `<span class="precio-oferta">${formatoPrecio(p.precio)}</span>` : '';
+    return `
+      <div class="card" data-id="${p.id}">
+        <img src="${img}" alt="${p.nombre}" loading="lazy">
+        <div class="card-body">
+          ${etiquetas}
+          <h3>${p.nombre}</h3>
+          <div class="meta">${p.materiales?.nombre || ''}</div>
+          <div class="precio">${formatoPrecio(p.precio_oferta || p.precio)}${precioOferta}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  grid.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => abrirModal(card.dataset.id));
+  });
+}
+
+function abrirModal(id) {
+  const p = productosCache.find(x => String(x.id) === String(id));
+  if (!p) return;
+
+  const imagenes = (p.imagenes || []).sort((a,b) => a.orden - b.orden);
+  const imgPrincipal = imagenes[0]?.url || 'https://via.placeholder.com/600x600?text=Sin+imagen';
+  const thumbs = imagenes.map((img, i) =>
+    `<img src="${img.url}" data-url="${img.url}" class="${i === 0 ? 'active' : ''}">`
+  ).join('');
+
+  const precioOferta = p.precio_oferta
+    ? `<span class="precio-oferta">${formatoPrecio(p.precio)}</span>`
+    : '';
+
+  const mensajeWsp = encodeURIComponent(`Hola, me interesa el producto: ${p.nombre} (${p.codigo || 'sin código'}) - ${formatoPrecio(p.precio_oferta || p.precio)}`);
+
+  $('modalContenido').innerHTML = `
+    <div class="galeria">
+      <img id="imgPrincipal" src="${imgPrincipal}" alt="${p.nombre}">
+      <div class="thumbs">${thumbs}</div>
+    </div>
+    <div class="info">
+      <h2>${p.nombre}</h2>
+      <div class="meta">${p.materiales?.nombre || ''} · Código: ${p.codigo || '—'}</div>
+      <div class="precio">${formatoPrecio(p.precio_oferta || p.precio)}${precioOferta}</div>
+      <p>${p.descripcion || 'Sin descripción.'}</p>
+      <div class="especificaciones">
+        <div><span>Material</span><span>${p.materiales?.nombre || '—'}</span></div>
+        <div><span>Stock</span><span>${p.stock > 0 ? p.stock + ' disponibles' : 'Agotado'}</span></div>
+      </div>
+      <a class="btn-wsp" href="https://wa.me/${WHATSAPP_NUMERO}?text=${mensajeWsp}" target="_blank">
+        Consultar por WhatsApp
+      </a>
+    </div>
+  `;
+
+  $('modalContenido').querySelectorAll('.thumbs img').forEach(t => {
+    t.addEventListener('click', () => {
+      $('imgPrincipal').src = t.dataset.url;
+      $('modalContenido').querySelectorAll('.thumbs img').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+
+  $('modalOverlay').classList.add('active');
+}
+
+$('btnCerrarModal').addEventListener('click', () => $('modalOverlay').classList.remove('active'));
+$('modalOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'modalOverlay') $('modalOverlay').classList.remove('active');
+});
+
+$('filtroCategoria').addEventListener('change', renderCatalogo);
+$('filtroMaterial').addEventListener('change', renderCatalogo);
+$('buscador').addEventListener('input', renderCatalogo);
+
+function mostrarVista(vista) {
+  ['vistaCatalogo', 'vistaLogin', 'vistaAdmin'].forEach(v => {
+    $(v).classList.toggle('oculto', v !== vista);
+  });
+}
+
+$('btnAdmin').addEventListener('click', async () => {
+  const { data: { user } } = await db.auth.getUser();
+  if (user) {
+    usuarioActual = user;
+    mostrarVista('vistaAdmin');
+    cargarListaAdmin();
+  } else {
+    mostrarVista('vistaLogin');
+  }
+});
+
+$('btnLogin').addEventListener('click', async () => {
+  const email = $('loginEmail').value;
+  const password = $('loginPassword').value;
+  ocultar($('loginError'));
+
+  const { data, error } = await db.auth.signInWithPassword({ email, password });
+  if (error) {
+    $('loginError').textContent = error.message;
+    mostrar($('loginError'));
+    return;
+  }
+  usuarioActual = data.user;
+  mostrarVista('vistaAdmin');
+  cargarListaAdmin();
+  mostrar($('btnSalir'));
+});
+
+$('btnSalir').addEventListener('click', async () => {
+  await db.auth.signOut();
+  usuarioActual = null;
+  ocultar($('btnSalir'));
+  mostrarVista('vistaCatalogo');
+});
+
+function resetFormulario() {
+  productoEditandoId = null;
+  imagenesAEliminar = [];
+  ['pCodigo','pNombre','pPrecio','pPrecioOferta','pStock','pDescripcion'].forEach(id => $(id).value = '');
+  $('pImagen').value = '';
+  $('pCategoria').value = '';
+  $('pMaterial').value = '';
+  $('formTitulo').textContent = 'Nuevo producto';
+  $('btnCrearProducto').textContent = 'Crear producto';
+  ocultar($('btnCancelarEdicion'));
+  ocultar($('imagenesExistentes'));
+  $('imagenesExistentes').innerHTML = '';
+  ocultar($('adminMensaje'));
+}
+
+function editarProducto(id) {
+  const p = productosCache.find(x => String(x.id) === String(id));
+  if (!p) return;
+
+  productoEditandoId = p.id;
+  imagenesAEliminar = [];
+
+  $('pCodigo').value = p.codigo || '';
+  $('pNombre').value = p.nombre || '';
+  $('pPrecio').value = p.precio || '';
+  $('pPrecioOferta').value = p.precio_oferta || '';
+  $('pStock').value = p.stock ?? 0;
+  $('pDescripcion').value = p.descripcion || '';
+  $('pCategoria').value = p.categoria_id || '';
+  $('pMaterial').value = p.material_id || '';
+  $('pImagen').value = '';
+
+  $('formTitulo').textContent = 'Editar producto: ' + p.nombre;
+  $('btnCrearProducto').textContent = 'Guardar cambios';
+  mostrar($('btnCancelarEdicion'));
+
+  const cont = $('imagenesExistentes');
+  const imagenes = (p.imagenes || []).sort((a,b) => a.orden - b.orden);
+  if (imagenes.length === 0) {
+    cont.innerHTML = '<span class="vacio">Este producto no tiene imágenes.</span>';
+  } else {
+    cont.innerHTML = imagenes.map(img => `
+      <div class="mini" data-id="${img.id}">
+        <img src="${img.url}">
+        <button title="Eliminar imagen" data-id="${img.id}">×</button>
+      </div>
+    `).join('');
+    cont.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const imgId = btn.dataset.id;
+        imagenesAEliminar.push(imgId);
+        btn.parentElement.remove();
+        if (cont.querySelectorAll('.mini').length === 0) {
+          cont.innerHTML = '<span class="vacio">Sin imágenes. Se eliminarán al guardar.</span>';
+        }
+      });
+    });
+  }
+  mostrar(cont);
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+$('btnCancelarEdicion').addEventListener('click', resetFormulario);
+
+$('btnCrearProducto').addEventListener('click', async () => {
+  const msg = $('adminMensaje');
+  ocultar(msg);
+
+  const nombre = $('pNombre').value.trim();
+  const precio = parseFloat($('pPrecio').value);
+  if (!nombre || !precio) {
+    msg.textContent = 'Nombre y precio son obligatorios.';
+    msg.className = 'error';
+    mostrar(msg);
+    return;
+  }
+
+  const datos = {
+    codigo: $('pCodigo').value.trim() || null,
+    nombre,
+    descripcion: $('pDescripcion').value.trim() || null,
+    precio,
+    precio_oferta: parseFloat($('pPrecioOferta').value) || null,
+    stock: parseInt($('pStock').value) || 0,
+    categoria_id: $('pCategoria').value || null,
+    material_id: $('pMaterial').value || null,
+  };
+
+  let productoId;
+
+  if (productoEditandoId) {
+    const { error: errUpd } = await db
+      .from('productos')
+      .update(datos)
+      .eq('id', productoEditandoId);
+
+    if (errUpd) {
+      msg.textContent = 'Error al actualizar: ' + errUpd.message;
+      msg.className = 'error';
+      mostrar(msg);
+      return;
+    }
+    productoId = productoEditandoId;
+
+    if (imagenesAEliminar.length > 0) {
+      await db.from('imagenes').delete().in('id', imagenesAEliminar);
+    }
+  } else {
+    const { data: nuevo, error: errProd } = await db
+      .from('productos')
+      .insert(datos)
+      .select()
+      .single();
+
+    if (errProd) {
+      msg.textContent = 'Error al crear producto: ' + errProd.message;
+      msg.className = 'error';
+      mostrar(msg);
+      return;
+    }
+    productoId = nuevo.id;
+  }
+
+  const archivos = $('pImagen').files;
+  if (archivos.length > 0) {
+    for (let i = 0; i < archivos.length; i++) {
+      const archivo = archivos[i];
+      const ruta = `${productoId}/${Date.now()}-${archivo.name}`;
+      const { error: errUp } = await db.storage.from('productos').upload(ruta, archivo);
+      if (errUp) {
+        msg.textContent = 'Error subiendo "' + archivo.name + '": ' + errUp.message;
+        msg.className = 'error';
+        mostrar(msg);
+        continue;
+      }
+      const { data: { publicUrl } } = db.storage.from('productos').getPublicUrl(ruta);
+      await db.from('imagenes').insert({
+        producto_id: productoId,
+        url: publicUrl,
+        orden: i,
+      });
+    }
+  }
+
+  msg.textContent = productoEditandoId ? 'Producto actualizado.' : 'Producto creado.';
+  msg.className = 'ok';
+  mostrar(msg);
+
+  resetFormulario();
+  await cargarProductos();
+  cargarListaAdmin();
+});
+
+function cargarListaAdmin() {
+  const lista = $('listaAdmin');
+  if (productosCache.length === 0) {
+    lista.innerHTML = '<p style="color:#888">No hay productos.</p>';
+    return;
+  }
+  lista.innerHTML = productosCache.map(p => `
+    <div class="item">
+      <div>
+        <strong>${p.nombre}</strong>
+        <span style="color:#888; font-size:0.85rem"> · ${p.codigo || 'sin código'} · ${formatoPrecio(p.precio)}</span>
+      </div>
+      <div class="acciones-item">
+        <button class="btn-editar-item" data-id="${p.id}">Editar</button>
+        <button class="btn-eliminar-item" data-id="${p.id}">Eliminar</button>
+      </div>
+    </div>
+  `).join('');
+
+  lista.querySelectorAll('.btn-editar-item').forEach(btn => {
+    btn.addEventListener('click', () => editarProducto(btn.dataset.id));
+  });
+
+  lista.querySelectorAll('.btn-eliminar-item').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('¿Eliminar este producto y sus imágenes?')) return;
+      const id = btn.dataset.id;
+
+      const p = productosCache.find(x => String(x.id) === String(id));
+      if (p && p.imagenes) {
+        for (const img of p.imagenes) {
+          const match = img.url.match(/\/productos\/(.+)$/);
+          if (match) {
+            await db.storage.from('productos').remove([match[1]]);
+          }
+        }
+      }
+
+      const { error } = await db.from('productos').delete().eq('id', id);
+      if (error) {
+        alert('Error: ' + error.message);
+        return;
+      }
+      await cargarProductos();
+      cargarListaAdmin();
+    });
+  });
+}
+
+(async function init() {
+  await cargarCategoriasYMateriales();
+  await cargarProductos();
+
+  const { data: { user } } = await db.auth.getUser();
+  if (user) {
+    usuarioActual = user;
+    mostrar($('btnSalir'));
+  }
+})();
+</script>
+</body>
+</html>
